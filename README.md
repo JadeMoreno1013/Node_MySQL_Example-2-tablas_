@@ -1,3 +1,13 @@
+
+Tipos principales de JOIN
+
+• INNER JOIN: Devuelve únicamente las filas que tienen valores coincidentes en ambas tablas.
+• LEFT JOIN (o LEFT OUTER JOIN): Devuelve todas las filas de la tabla de la izquierda y las filas coincidentes de la tabla de la derecha (si no hay coincidencia, muestra NULL).
+• RIGHT JOIN (o RIGHT OUTER JOIN): Devuelve todas las filas de la tabla de la derecha y las filas coincidentes de la tabla de la izquierda (si no hay coincidencia, muestra NULL).
+• FULL JOIN (o FULL OUTER JOIN): Combina los resultados de LEFT JOIN y RIGHT JOIN; devuelve todas las filas cuando hay una coincidencia en cualquiera de las tablas.
+
+
+
 1. El orden de escritura vs. el orden de ejecución
 El motor de MySQL no procesa la consulta de arriba a abajo. Entender esto te salvará de muchos errores, especialmente al usar alias:
 
