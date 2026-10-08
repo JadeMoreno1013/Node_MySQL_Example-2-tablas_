@@ -13,12 +13,12 @@
 
     <section>
       <h2>Post Operation</h2>
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-        <label for="birthdate">Birthdate:</label><br>
-        <input type="date" id="birthdate" name="birthdate" required><br><br>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br><br>
+      <label for="birthdate">Birthdate:</label><br>
+      <input type="date" id="birthdate" name="birthdate" required><br><br>
 
-        <button id="postBtn">Send</button>
+      <button id="postBtn">Send</button>
       <p id="postSqlResult"></p>
     </section>
 
@@ -30,12 +30,39 @@
 
     <section>
       <h2>Get Entry by ID</h2>
-        <label for="id">id:</label><br>
-        <input type="text" id="id" name="id" required><br><br>
-        <button id="getOneBtn">Send</button>
+      <label for="id">id:</label><br>
+      <input type="text" id="id" name="id" required><br><br>
+      <button id="getOneBtn">Send</button>
       <ul id="getOneResult"></ul>
     </section>
   </div>
+
+
+  <!-- Nueva sección para la tabla de Productos -->
+  <section>
+    <h2>Agregar Producto</h2>
+    <label for="prodName">Nombre del producto:</label><br>
+    <input type="text" id="prodName" required><br><br>
+
+    <label for="prodPrice">Precio:</label><br>
+    <input type="number" id="prodPrice" required><br><br>
+
+    <button id="postProdBtn">Guardar Producto</button>
+    <p id="productStatus" role="status"></p>
+  </section>
+
+  <section>
+    <h2>Lista de Productos</h2>
+    <button id="getProdsBtn">Cargar Productos</button>
+    <ul id="prodsResult"></ul>
+  </section>
+
+
+
+
+
+
+
 
   <script src="./js/sql.js"></script>
 </body>

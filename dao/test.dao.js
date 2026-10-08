@@ -25,8 +25,8 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   try {
     const { name, birthdate } = req.body;
-    if(!name || !birthdate){
-        res.status(400).json({ error: "Bad Request" });
+    if (!name || !birthdate) {
+      return res.status(400).json({ error: "Bad Request" });
     }
     const [result] = await db.query(
       'INSERT INTO test (name, birthdate) VALUES (?, ?)',

@@ -81,3 +81,77 @@ getOneButton.addEventListener('click', async function () {
         document.getElementById('getOneResult').innerHTML = '<li>Error</li>';
     }
 });
+
+
+//----------------------------------------
+// --- CÓDIGO PARA LA TABLA PRODUCTOS ---
+
+// Buscar los botones en el HTML
+const btnGuardarProducto = document.getElementById('postProdBtn');
+const btnCargarProductos = document.getElementById('getProdsBtn');
+
+const productStatus = document.getElementById('productStatus');
+
+const cargarProductos = async () => {
+    const lista = document.getElementById('prodsResult');
+    lista.innerHTML = '';
+
+    try {
+        const respuesta = await fetch('/api/productos');
+        const productos = await respuesta.json();
+        if (!respuesta.ok) {
+            throw new Error(productos.error || 'No se pudieron cargar los productos.');
+        }
+
+        if (productos.length === 0) {
+            lista.innerHTML = '<li>No hay productos registrados.</li>';
+            return;
+        }
+
+        productos.forEach(producto => {
+            const item = document.createElement('li');
+            item.textContent = JSON.stringify(producto);
+            lista.appendChild(item);
+        });
+    } catch (error) {
+        console.error('Error al cargar productos:', error);
+        lista.innerHTML = '<li>Error al cargar productos. Revisa la conexión con el servidor.</li>';
+    }
+};
+
+if (btnCargarProductos) {
+    btnCargarProductos.addEventListener('click', cargarProductos);
+}
+
+if (btnGuardarProducto) {
+    btnGuardarProducto.addEventListener('click', async () => {
+        const nombreProducto = document.getElementById('prodName').value.trim();
+        const precioProducto = document.getElementById('prodPrice').value;
+        productStatus.textContent = '';
+
+        if (!nombreProducto || precioProducto === '') {
+            productStatus.textContent = 'Por favor llena el nombre y el precio.';
+            return;
+        }
+
+        try {
+            const respuesta = await fetch('/api/productos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre: nombreProducto, precio: precioProducto })
+            });
+            const resultado = await respuesta.json();
+            if (!respuesta.ok) {
+                throw new Error(resultado.error || 'Error al guardar el producto.');
+            }
+
+            productStatus.textContent = 'Producto guardado en la base de datos.';
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodPrice').value = '';
+            await cargarProductos();
+        } catch (error) {
+            console.error('Error al guardar el producto:', error);
+            productStatus.textContent = error.message;
+        }
+    });
+}
